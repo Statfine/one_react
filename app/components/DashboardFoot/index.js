@@ -7,6 +7,11 @@ import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import { browserHistory } from 'react-router';
 
+import SvgFish from 'material-ui/svg-icons/image/panorama-fish-eye';
+import SvgContact from 'material-ui/svg-icons/communication/import-contacts';
+import SvgMusic from 'material-ui/svg-icons/av/library-music';
+import SvgMove from 'material-ui/svg-icons/av/movie';
+
 const Foot = styled.div`
   width: 100%;
   height: 60px;
@@ -24,7 +29,10 @@ const EachItme = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;
-  color: ${({ choosed }) => choosed ? '#fff' : '#c3c3c3'}
+  & svg {
+    color: ${({ choosed }) => choosed ? '#fff!important' : '#333!important'}
+    filter: ${({ choosed }) => choosed ? '#fff!important' : '#333!important'}
+  }
 `;
 
 export default class DashFoot extends PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -32,10 +40,18 @@ export default class DashFoot extends PureComponent { // eslint-disable-line rea
     const { index } = this.props;
     return (
       <Foot>
-        <EachItme choosed={index === '/list'} onClick={() => browserHistory.push('/list')}>首页</EachItme>
-        <EachItme choosed={index === '/book'} onClick={() => browserHistory.push('/book')}>读书</EachItme>
-        <EachItme choosed={index === '/music'} onClick={() => browserHistory.push('/music')}>音乐</EachItme>
-        <EachItme choosed={index === '/move'} onClick={() => browserHistory.push('/move')}>视频</EachItme>
+        <EachItme choosed={index === '/list'} onClick={() => browserHistory.push('/list')}>
+          <SvgFish />
+        </EachItme>
+        <EachItme choosed={index === '/book'} onClick={() => browserHistory.push('/book')}>
+          <SvgContact />
+        </EachItme>
+        <EachItme choosed={index === '/music'} onClick={() => browserHistory.push('/music')}>
+          <SvgMusic />
+        </EachItme>
+        <EachItme choosed={index === '/move'} onClick={() => browserHistory.push('/move')}>
+          <SvgMove />
+        </EachItme>
       </Foot>
     );
   }
