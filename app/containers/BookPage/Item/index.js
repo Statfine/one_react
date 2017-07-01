@@ -47,6 +47,7 @@ const BottomInfo = styled.div`
   align-items: center;
   padding: 10px 0;
   color: #6b6b6b;
+  font-size: 1.2rem;
 `;
 
 export default class Item extends PureComponent { // eslint-disable-line react/prefer-stateless-function

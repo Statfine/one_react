@@ -7,6 +7,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import Header from 'components/Header';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import Loading from 'components/Loading';
 import { fetchList } from './actions';
 import {
   selectContentList, selectReportsRequesting,
@@ -31,7 +32,7 @@ class BookPage extends PureComponent { // eslint-disable-line react/prefer-state
         <Header title={'一个阅读'} />
         {
           reportsRequesting ?
-            <div>Loading</div> : <div style={{ paddingTop: '60px', backgroundColor: '#3e3e3e' }}>{this.renderList(contentList)}</div>
+            <Loading /> : <div style={{ padding: '60px 0', backgroundColor: '#3e3e3e' }}>{this.renderList(contentList)}</div>
         }
       </div>
     );

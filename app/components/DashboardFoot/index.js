@@ -29,6 +29,7 @@ const EachItme = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;
+  border-top: 1px solid #3e3e3e;
   & svg {
     color: ${({ choosed }) => choosed ? '#fff!important' : '#333!important'}
     filter: ${({ choosed }) => choosed ? '#fff!important' : '#333!important'}

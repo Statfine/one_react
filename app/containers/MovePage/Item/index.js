@@ -42,6 +42,7 @@ const Words = styled.p`
 `;
 
 const Subtitle = styled.p`
+  font-size: 1.3rem;
   text-align: right;
 `;
 
@@ -51,6 +52,7 @@ const BottomInfo = styled.div`
   align-items: center;
   padding: 10px 0;
   color: #6b6b6b;
+  font-size: 1.2rem;
 `;
 
 export default class Item extends PureComponent { // eslint-disable-line react/prefer-stateless-function
