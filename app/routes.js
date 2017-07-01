@@ -83,12 +83,16 @@ export default function createRoutes(store) {
           onEnter: checkNRefreshToken(),
           getComponent(nextState, cb) {
             const importModules = Promise.all([
+              import('containers/BookPage/reducer'),
+              import('containers/BookPage/sagas'),
               import('containers/BookPage'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([component]) => {
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('BookPage', reducer.default);
+              injectSagas(sagas.default);
               renderRoute(component);
             });
 
@@ -100,12 +104,16 @@ export default function createRoutes(store) {
           onEnter: checkNRefreshToken(),
           getComponent(nextState, cb) {
             const importModules = Promise.all([
+              import('containers/MusicPage/reducer'),
+              import('containers/MusicPage/sagas'),
               import('containers/MusicPage'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([component]) => {
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('MusicPage', reducer.default);
+              injectSagas(sagas.default);
               renderRoute(component);
             });
 
@@ -117,12 +125,16 @@ export default function createRoutes(store) {
           onEnter: checkNRefreshToken(),
           getComponent(nextState, cb) {
             const importModules = Promise.all([
+              import('containers/MovePage/reducer'),
+              import('containers/MovePage/sagas'),
               import('containers/MovePage'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([component]) => {
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('MovePage', reducer.default);
+              injectSagas(sagas.default);
               renderRoute(component);
             });
 

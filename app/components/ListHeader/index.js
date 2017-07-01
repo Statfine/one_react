@@ -7,7 +7,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.div`
-  height: 80px;
+  height: 60px;
   position: fixed;
   width: 100%;
   display: flex;
@@ -19,11 +19,11 @@ const Header = styled.div`
 `;
 
 const Time = styled.p`
-  font-size: 2.4rem;
+  font-size: 2.0rem;
 `;
 
 const Address = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 `;
 
 export default class DashHeader extends PureComponent { // eslint-disable-line react/prefer-stateless-function

@@ -35,7 +35,7 @@ class ListPage extends PureComponent { // eslint-disable-line react/prefer-state
         <Header date={date} weather={weather} />
         {
           reportsRequesting ?
-            <div>Loading</div> : this.renderList(contentList)
+            <div>Loading</div> : <div style={{ paddingTop: '60px', backgroundColor: '#3e3e3e' }}>{this.renderList(contentList)}</div>
         }
       </div>
     );
