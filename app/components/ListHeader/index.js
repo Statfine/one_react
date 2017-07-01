@@ -16,6 +16,7 @@ const Header = styled.div`
   align-items: center;
   color: #c3c3c3;
   background: #4a4a4a;
+  border-bottom: 1px solid #3e3e3e;
 `;
 
 const Time = styled.p`

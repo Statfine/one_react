@@ -17,6 +17,7 @@ const Content = styled.div`
   color: #c3c3c3;
   background: #4a4a4a;
   font-size: 2.0rem;
+  border-bottom: 1px solid #3e3e3e;
 `;
 
 export default class Header extends PureComponent { // eslint-disable-line react/prefer-stateless-function

@@ -29,7 +29,7 @@ export default function createRoutes(store) {
       onEnter: checkNRefreshToken(),
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage'),
+          import('containers/WelcomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
