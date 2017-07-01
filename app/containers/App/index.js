@@ -11,13 +11,17 @@
  * the linting exception.
  */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { browserHistory } from 'react-router';
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import { selectFirstOpen } from './selectors';
 
-  static propTypes = {
-    children: React.PropTypes.node,
-  };
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    if (this.props.isFirstOpen) browserHistory.push('/');
+  }
 
   render() {
     return (
@@ -27,3 +31,18 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.node,
+  isFirstOpen: PropTypes.bool,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isFirstOpen: selectFirstOpen(),
+});
+
+function mapDispatchToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

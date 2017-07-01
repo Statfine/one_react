@@ -10,4 +10,5 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const CHANGE_FIRST_OPEN = 'app/ChangeFirstOpen';
 export const CHANGE_LOCALE = 'app/ChangeLocale';

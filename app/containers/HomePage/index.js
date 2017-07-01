@@ -1,6 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { changeFirstOpen } from '../App/actions';
 
 const Container = styled.div`
   height: 100vh;
@@ -24,7 +27,7 @@ const Time = styled.p`
   color: #838383;
 `;
 
-export default class HomePage extends PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends PureComponent { // eslint-disable-line react/prefer-stateless-function
   state = {
     backward: 3,
   }
@@ -36,14 +39,17 @@ export default class HomePage extends PureComponent { // eslint-disable-line rea
   }
   getDate = () => {
     const myDate = new Date();
-    return this.set(`${myDate.getFullYear()}年${myDate.getMonth() + 1}`);
+    return this.set(`${myDate.getFullYear()}年${myDate.getMonth() + 1}月`);
   }
   handleStartInterval = () => {
+    this.props.onChangeFirstOpen(false);
     this.setState({ backward: 5 }, () => {
       this.intervalTime = setInterval(() => {
         const backward = this.state.backward - 1;
         if (backward > 1) this.setState({ backward });
-        else browserHistory.push('/list');
+        else {
+          browserHistory.push('/list');
+        }
       }, 1000);
     });
   }
@@ -71,3 +77,17 @@ export default class HomePage extends PureComponent { // eslint-disable-line rea
     );
   }
 }
+
+HomePage.propTypes = {
+  onChangeFirstOpen: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onChangeFirstOpen: (val) => dispatch(changeFirstOpen(val)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
