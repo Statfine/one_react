@@ -27,7 +27,13 @@ const selectFirstOpen = () => createSelector(
   (globalState) => globalState.get('isFirstOpen')
 );
 
+const selectMusic = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('music').toJS()
+);
+
 export {
   makeSelectLocationState,
   selectFirstOpen,
+  selectMusic,
 };

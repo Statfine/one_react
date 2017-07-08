@@ -9,9 +9,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Loading from 'components/Loading';
 import { fetchList } from './actions';
+import { changeMusicPlay } from '../App/actions';
 import {
   selectContentList, selectReportsRequesting,
 } from './selector';
+import { selectMusic } from '../App/selectors';
 import Itme from './Item';
 
 class MusicPage extends PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -21,7 +23,7 @@ class MusicPage extends PureComponent { // eslint-disable-line react/prefer-stat
 
   renderList = (list) =>
     list.map((item, index) => (
-      <Itme key={index} info={item} />
+      <Itme key={index} info={item} onChoosed={this.props.omChangeMusicPlay} musicObj={this.props.musicObj} />
     ))
 
   render() {
@@ -42,16 +44,20 @@ MusicPage.propTypes = {
   onFetchList: PropTypes.func,
   contentList: PropTypes.array,
   reportsRequesting: PropTypes.bool,
+  omChangeMusicPlay: PropTypes.func,
+  musicObj: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   contentList: selectContentList(),
   reportsRequesting: selectReportsRequesting(),
+  musicObj: selectMusic(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onFetchList: () => dispatch(fetchList()),
+    omChangeMusicPlay: (...arg) => dispatch(changeMusicPlay(...arg)),
   };
 }
 

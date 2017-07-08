@@ -11,7 +11,6 @@ const ani = keyframes`
 `;
 
 const Ani = styled.div`
-  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -48,10 +47,6 @@ const Ani = styled.div`
 `;
 
 const Model = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.15);
   z-index: 1;
   left: 0;
   top: 0;

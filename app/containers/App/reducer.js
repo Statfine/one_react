@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 
 import { combineReducers } from 'redux-immutable';
 
-import { CHANGE_LOCALE, CHANGE_FIRST_OPEN } from './constants';
+import { CHANGE_LOCALE, CHANGE_FIRST_OPEN, CHANGE_MUSCI_PALY } from './constants';
 
 const initialState = fromJS({
   language: 'en',
@@ -16,6 +16,10 @@ const initialState = fromJS({
     promptMsg: '默认提示信息',
     promptType: 0,
   },
+  music: {
+    musicSrc: '',
+    play: false,
+  },
 });
 
 function appReducer(state = initialState, action) {
@@ -24,6 +28,8 @@ function appReducer(state = initialState, action) {
       return state.set('language', action.payload);
     case CHANGE_FIRST_OPEN:
       return state.set('isFirstOpen', action.payload);
+    case CHANGE_MUSCI_PALY:
+      return state.mergeDeep(fromJS({ music: action.payload }));
     default:
       return state;
   }

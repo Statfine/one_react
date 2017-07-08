@@ -4,9 +4,16 @@
  */
 
 import React, { PureComponent, PropTypes } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import SvgLike from 'material-ui/svg-icons/action/favorite';
+import IconPlay from 'material-ui/svg-icons/av/play-arrow';
+import IconPause from 'material-ui/svg-icons/av/pause';
+
+const ani = keyframes`
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(360deg); }
+`;
 
 const Content = styled.div`
   margin-bottom: 20px;
@@ -42,12 +49,31 @@ const ImageContent = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  animation: ${ani} 5s infinite linear;
+  animation-fill-mode:forwards;
 `;
 
 const Image = styled.img`
-  width: 60%;
-  height: auto;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
+`;
+
+const PlayIcon = styled.div`
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  & svg {
+    width: 4rem!important;
+    height: 4rem!important;
+    color: #fff!important;
+    fill: #fff!important;
+  }
 `;
 
 const Words = styled.p`
@@ -65,15 +91,33 @@ const BottomInfo = styled.div`
 `;
 
 export default class Item extends PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    this.cover.style.webkitAnimationPlayState = 'paused';
+  }
+
+  handleClick = () => {
+    const { info, onChoosed, musicObj } = this.props;
+    if (info.id === musicObj.musicSrc && musicObj.play) {
+      this.cover.style.webkitAnimationPlayState = 'paused';  // 旋转动画暂停
+      return onChoosed({ musicSrc: info.id, play: false });
+    }
+    this.cover.style.webkitAnimationPlayState = 'running';
+    return onChoosed({ musicSrc: info.id, play: true });
+  }
+
   render() {
-    const { info } = this.props;
+    const { info, musicObj } = this.props;
 
     return (
       <Content>
         <Top>-音乐-</Top>
         <Title>{info.title}</Title>
         <Auther>文&nbsp;/&nbsp;{info.author.user_name}</Auther>
-        <ImageContent><Image src={info.img_url} /></ImageContent>
+        <ImageContent innerRef={(c) => { this.cover = c; }} choosed={info.id === musicObj.musicSrc && musicObj.play} onClick={() => this.handleClick()}>
+          <PlayIcon>{musicObj.musicSrc === info.id && musicObj.play ? <IconPause /> : <IconPlay />}</PlayIcon>
+          <Image src={info.img_url} />
+        </ImageContent>
         <AudioAuther>{info.music_name}&nbsp;.&nbsp;{info.audio_author}</AudioAuther>
         <Words>{info.forward}</Words>
         <BottomInfo>
@@ -87,4 +131,6 @@ export default class Item extends PureComponent { // eslint-disable-line react/p
 
 Item.propTypes = {
   info: PropTypes.object,
+  onChoosed: PropTypes.func,
+  musicObj: PropTypes.object,
 };

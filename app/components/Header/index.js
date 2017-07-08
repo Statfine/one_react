@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const Content = styled.div`
   height: 60px;
   position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -18,6 +19,7 @@ const Content = styled.div`
   background: #4a4a4a;
   font-size: 2.0rem;
   border-bottom: 1px solid #3e3e3e;
+  z-index: 100;
 `;
 
 export default class Header extends PureComponent { // eslint-disable-line react/prefer-stateless-function

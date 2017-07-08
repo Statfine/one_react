@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const Header = styled.div`
   height: 60px;
   position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -17,6 +18,7 @@ const Header = styled.div`
   color: #c3c3c3;
   background: #4a4a4a;
   border-bottom: 1px solid #3e3e3e;
+  z-index: 100;
 `;
 
 const Time = styled.p`

@@ -12,3 +12,4 @@
 export const DEFAULT_LOCALE = 'en';
 export const CHANGE_FIRST_OPEN = 'app/ChangeFirstOpen';
 export const CHANGE_LOCALE = 'app/ChangeLocale';
+export const CHANGE_MUSCI_PALY = 'app/CHANGE_MUSCI_PALY';
