@@ -1,13 +1,16 @@
 /**
  * Created by Dashboard on 2017/1/9.
  */
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import styled, { keyframes } from 'styled-components';
 import DashFoot from 'components/DashboardFoot';
 import IconMusic from 'material-ui/svg-icons/image/music-note';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import HeaderAudoiPlayer from './HeaderAudoiPlayer';
 import { selectMusic } from '../App/selectors';
+import { changeMusicPlay } from '../App/actions';
+
 
 const Container = styled.div`
   height: 100vh;
@@ -40,6 +43,9 @@ const MusicContent = styled.div`
 `;
 
 const Music = styled.div`
+  display: flex;
+  justify-content:center;
+  align-items: center;
   height: 2rem;
   background: #e6e6e6;
   width: 2rem;
@@ -48,12 +54,21 @@ const Music = styled.div`
   animation: ${ani} 5s infinite linear;
 `;
 
-class Dashboard extends Component { // eslint-disable-line react/prefer-stateless-function
+class Dashboard extends PureComponent {
+
+  handleOpenAudio = (event) => {
+    const { onChangeMusicPlay, musicObj } = this.props;
+    event.preventDefault();
+    event.stopPropagation();
+    onChangeMusicPlay({ audioOpen: !musicObj.audioOpen });
+  }
+
   render() {
-    const { children, location, musicObj } = this.props;
+    const { children, location, musicObj, onChangeMusicPlay } = this.props;
     return (
       <Container>
-        { (!!musicObj.musicSrc && musicObj.play) && <MusicContent><Music><IconMusic /></Music></MusicContent>}
+        <HeaderAudoiPlayer musicObj={musicObj} onChangeMusicPlay={onChangeMusicPlay} />
+        { (!!musicObj.musicSrc && musicObj.play) && <MusicContent onClick={(e) => this.handleOpenAudio(e)}><Music><IconMusic /></Music></MusicContent>}
         {children}
         <DashFoot index={location.pathname} />
       </Container>
@@ -65,10 +80,17 @@ Dashboard.propTypes = {
   children: PropTypes.node,
   location: PropTypes.object,
   musicObj: PropTypes.object,
+  onChangeMusicPlay: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   musicObj: selectMusic(),
 });
 
-export default connect(mapStateToProps)(Dashboard);
+function mapDispatchToProps(dispatch) {
+  return {
+    onChangeMusicPlay: (...arg) => dispatch(changeMusicPlay(...arg)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -48,6 +48,7 @@ const ImageContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   margin-bottom: 10px;
   animation: ${ani} 5s infinite linear;
   animation-fill-mode:forwards;
@@ -63,6 +64,10 @@ const PlayIcon = styled.div`
   position: absolute;
   width: 6rem;
   height: 6rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -3rem;
+  margin-left: -3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,12 +103,12 @@ export default class Item extends PureComponent { // eslint-disable-line react/p
 
   handleClick = () => {
     const { info, onChoosed, musicObj } = this.props;
-    if (info.id === musicObj.musicSrc && musicObj.play) {
+    if (info.id === musicObj.id && musicObj.play) {
       this.cover.style.webkitAnimationPlayState = 'paused';  // 旋转动画暂停
-      return onChoosed({ musicSrc: info.id, play: false });
+      return onChoosed({ id: info.id, play: false, musicSrc: '' });
     }
     this.cover.style.webkitAnimationPlayState = 'running';
-    return onChoosed({ musicSrc: info.id, play: true });
+    return onChoosed({ id: info.id, play: true, musicSrc: 'http://cloud-clip-out.oss-cn-hangzhou.aliyuncs.com/mp3/49908875-9691-422a-ac80-bd3de781753f_5d9c746f-2328-409f-8064-44bda29695b8.mp3' });
   }
 
   render() {

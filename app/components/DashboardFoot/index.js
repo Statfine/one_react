@@ -21,6 +21,7 @@ const Foot = styled.div`
   display: flex;
   color: #c3c3c3;
   background: #4a4a4a;
+  z-index: 1001;
 `;
 
 const EachItme = styled.div`

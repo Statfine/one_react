@@ -17,8 +17,10 @@ const initialState = fromJS({
     promptType: 0,
   },
   music: {
+    id: '',
     musicSrc: '',
     play: false,
+    audioOpen: false,
   },
 });
 
