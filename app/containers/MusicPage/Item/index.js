@@ -4,16 +4,17 @@
  */
 
 import React, { PureComponent, PropTypes } from 'react';
-import styled, { keyframes } from 'styled-components';
+// import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import SvgLike from 'material-ui/svg-icons/action/favorite';
 import IconPlay from 'material-ui/svg-icons/av/play-arrow';
 import IconPause from 'material-ui/svg-icons/av/pause';
 
-const ani = keyframes`
-  0%{ transform:rotate(0deg); }
-  100%{ transform:rotate(360deg); }
-`;
+// const ani = keyframes`
+//   0%{ transform:rotate(0deg); }
+//   100%{ transform:rotate(360deg); }
+// `;
 
 const Content = styled.div`
   margin-bottom: 20px;
@@ -49,10 +50,10 @@ const ImageContent = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 10px;
-  animation: ${ani} 5s infinite linear;
-  animation-fill-mode:forwards;
 `;
+
+//  animation: ${ani} 5s infinite linear;
+// animation-fill-mode:forwards;
 
 const Image = styled.img`
   width: 180px;

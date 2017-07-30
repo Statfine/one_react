@@ -41,7 +41,12 @@ export default class DashFoot extends PureComponent { // eslint-disable-line rea
   render() {
     const { index } = this.props;
     return (
-      <Foot>
+      <Foot
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+      >
         <EachItme choosed={index === '/list'} onClick={() => browserHistory.push('/list')}>
           <SvgFish />
         </EachItme>

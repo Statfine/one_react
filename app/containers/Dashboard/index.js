@@ -49,6 +49,8 @@ const Music = styled.div`
   height: 2rem;
   background: #e6e6e6;
   width: 2rem;
+  padding: 0;
+  margin: 0;
   border-radius: 50%;
   margin-left: -1rem;
   animation: ${ani} 5s infinite linear;

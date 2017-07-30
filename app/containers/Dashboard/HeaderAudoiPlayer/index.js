@@ -3,6 +3,8 @@
  */
 import React, { PureComponent, PropTypes } from 'react';
 import styled from 'styled-components';
+import IconPause from 'material-ui/svg-icons/av/pause';
+import IconPlay from 'material-ui/svg-icons/av/play-arrow';
 
 const Cover = styled.div`
   position: fixed;
@@ -56,9 +58,10 @@ export default class AudioPlayer extends PureComponent {
   state = {
     duration: 0,
     currentTime: 0,
+    play: true,
   }
 
-  componentDidMount() {
+  componentWillMount() {
     window.addEventListener('click', this.onBodyCLick, false);
   }
 
@@ -75,9 +78,16 @@ export default class AudioPlayer extends PureComponent {
     this.setState({ currentTime: this.audio.currentTime });
   }
 
+  audioPlayControl = () => {
+    this.setState({ play: !this.audio.paused });
+    if (this.audio.paused) this.audio.play();
+    else this.audio.pause();
+    this.setState({ play: !this.audio.paused });
+  }
+
   render() {
     const { musicObj } = this.props;
-    const { duration, currentTime } = this.state;
+    const { duration, currentTime, play } = this.state;
 
     return (
       <Cover audioOpen={musicObj.audioOpen}>
@@ -101,6 +111,11 @@ export default class AudioPlayer extends PureComponent {
           </Control>
           <Time>
             <p>{formatTime(duration)}</p>
+            <div
+              onClick={() => this.audioPlayControl()}
+            >
+              {play ? <IconPlay /> : <IconPause />}
+            </div>
             <p>{formatTime(currentTime)}</p>
           </Time>
         </Container>
